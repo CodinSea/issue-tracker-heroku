@@ -1,0 +1,12 @@
+Migration not found: 2021_12_19_072044_create_comments_table
+Migration not found: 2022_01_08_225909_create_photos_table
+Migration not found: 2021_12_20_134517_create_project_personnels_table
+Migration not found: 2021_12_19_133712_create_histories_table
+Migration not found: 2021_12_19_131837_create_attachments_table
+Migration not found: 2021_12_16_213138_create_tickets_table
+Migration not found: 2021_12_14_220031_create_projects_table
+Migration not found: 2019_12_14_000001_create_personal_access_tokens_table
+Migration not found: 2019_08_19_000000_create_failed_jobs_table
+Migration not found: 2014_10_12_100000_create_password_resets_table
+Migration not found: 2014_10_12_000000_create_users_table
+Nothing to migrate.
