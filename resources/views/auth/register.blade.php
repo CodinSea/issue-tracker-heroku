@@ -93,13 +93,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="role">
-                            Role:
-                        </label>
-                        <input type="text" class="form-control" id="role" name="role">
-                    </div>
-
-                    <div class="form-group">
                         <input type="submit" id="btn" value="Sign up">
                         <br>
                         <br>
