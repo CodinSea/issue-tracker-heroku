@@ -60,6 +60,7 @@ class UserAuthController extends Controller
         $newUser->last_name = $request->lastname;
         $newUser->email = $request->email;
         $newUser->password = Hash::make($request->password);
+        $newUser->role = $request->role;
         $query = $newUser->save();
 
         if ($query) {
