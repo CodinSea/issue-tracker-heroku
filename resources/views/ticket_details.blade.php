@@ -151,7 +151,7 @@
 											</div>
 										</div>
 										<div class="px-4 py-3">
-											@if (session('LoggedUserId') != 17)
+											@if (session('LoggedUserId') != 3)
 												<button type="submit">Update</button>
 											@else
 												<button type="submit" disabled>Update</button>
@@ -321,7 +321,7 @@
 					<input type="hidden" id="tid" name="tid" value="{{ $ticket->id }}">
 					<input type="hidden" id="tcommenterid" name="tcommenterid" value="{{ session('LoggedUserId') }}">
 					<input type="text" id="tcomment" name="tcomment">
-					@if (session("LoggedUserId") != 17)
+					@if (session("LoggedUserId") != 3)
 						<input type="submit" value="ADD" style="background-color: darkturquoise; color: white">
 					@else
 						<input type="submit" value="ADD" style="background-color: darkturquoise; color: white" disabled>
@@ -429,7 +429,7 @@
 							</label>
 							<div class="d-flex">
 								<input type="text" id="tfiledescription" name="tfiledescription" style="width: auto">
-								@if (session('LoggedUserId') != 17)
+								@if (session('LoggedUserId') != 3)
 									<input type="submit" value="UPLOAD FILE" style="background-color: darkturquoise; color: white">
 								@else
 									<input type="submit" value="UPLOAD FILE" style="background-color: darkturquoise; color: white" disabled>

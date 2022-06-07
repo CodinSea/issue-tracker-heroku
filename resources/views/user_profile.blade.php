@@ -19,7 +19,7 @@
                             <div class="d-flex flex-column align-items-center">
                                 <label for="picture">Select your picture:</label>
                                 <input class="py-2 w-100" type="file" id="picture" name="picture">
-                                @if (session('LoggedUserId') != 17 && session('LoggedUserRole') != null)
+                                @if (session('LoggedUserId') != 3 && session('LoggedUserRole') != null)
                                     <button class="btn btn-secondary" type="submit">Upload</button>
                                 @else
                                     <button class="btn btn-secondary" type="submit" disabled>Upload</button>
@@ -197,7 +197,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-sm-12">
-                            @if (session('LoggedUserId') != 17 && session('LoggedUserRole') != null)
+                            @if (session('LoggedUserId') != 3 && session('LoggedUserRole') != null)
                                 <button class="btn btn-secondary" type="submit" id="link2">Update</button>
                             @else
                                 <button class="btn btn-secondary" type="submit" id="link2" disabled>Update</button>

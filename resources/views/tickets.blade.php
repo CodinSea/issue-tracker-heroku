@@ -74,7 +74,7 @@
                             <input type="hidden" name="tstatus" value="Open">      
                             <div class="row p-3">
                                 <div class="col">
-                                    @if (session('LoggedUserId') != 17 && session('LoggedUserRole') != null)
+                                    @if (session('LoggedUserId') != 3 && session('LoggedUserRole') != null)
                                         <button type="submit">Submit</button>
                                     @else
                                         <button type="submit" disabled>Submit</button>

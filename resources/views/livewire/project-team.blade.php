@@ -94,7 +94,7 @@
                <div>
                     <form id="project_assignment" action="{{ route('assignProject') }}" method="post"> 
                     {{ csrf_field() }}
-                         @if (session('LoggedUserId') != 17)
+                         @if (session('LoggedUserId') != 3)
                               <button style="float: right" type="submit">Assign</button> 
                          @else
                               <button style="float: right" type="submit" disabled>Assign</button> 

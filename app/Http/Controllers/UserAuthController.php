@@ -36,7 +36,7 @@ class UserAuthController extends Controller
 
     public function directDemoUser(Request $request) 
     {
-        $user = User::where('id', 17)->first();
+        $user = User::where('id', 3)->first();
         $request->session()->put('LoggedUser', $user);
         $request->session()->put('LoggedUserFirstName', $user->first_name);
         $request->session()->put('LoggedUserId', $user->id);
@@ -176,7 +176,7 @@ class UserAuthController extends Controller
 
     public function index(Request $request) 
     {
-        $allUsers = User::where('id', '!=', 17)->get();
+        $allUsers = User::where('id', '!=', 3)->get();
 
         if(isset($_GET['entriesPerPage'])) {
             $entriesPerPage = $_GET['entriesPerPage'];
@@ -192,7 +192,7 @@ class UserAuthController extends Controller
 
         if(isset($_GET['query'])) {
             $searchText = $_GET['query'];
-            $users = User::where('id', '!=', 17)
+            $users = User::where('id', '!=', 3)
                             ->where(function($query) use ($searchText) {
                                 $query->where('first_name','LIKE','%'.$searchText.'%')
                                       ->orWhere('last_name','LIKE','%'.$searchText.'%')
@@ -204,7 +204,7 @@ class UserAuthController extends Controller
 
             return view('role_assignment')->with(compact('allUsers', 'users'))->with('searchText', $searchText);
         } else {          
-            $users = User::where('id', '!=', 17)
+            $users = User::where('id', '!=', 3)
                             ->where(function($query) use ($currentQuery) {
                                 $query->where('first_name','LIKE','%'.$currentQuery.'%')
                                       ->orWhere('last_name','LIKE','%'.$currentQuery.'%')

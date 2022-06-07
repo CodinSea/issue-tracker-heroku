@@ -35,7 +35,7 @@
 									Select the role to assign:
 								</label>
 								<div class="p-2">
-									@if (session('LoggedUserId') != 17)
+									@if (session('LoggedUserId') != 3)
 									<select id="roles" name="assigned_role" onchange="this.form.submit()">
 									@else
 									<select id="roles" name="assigned_role">

@@ -51,7 +51,7 @@
                                             </div>
                                         </div>
                                         <div class="px-4 py-3">
-                                            @if (session('LoggedUserId') != 17)
+                                            @if (session('LoggedUserId') != 3)
                                             <button type="submit">Update</button>
                                             @else
                                             <button type="submit" disabled>Update</button>
