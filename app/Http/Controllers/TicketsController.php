@@ -147,6 +147,12 @@ class TicketsController extends Controller
         return redirect('tickets');
     }
 
+    public function deleteTicket(Request $request) {
+        $deleted = Ticket::find($request->tid)->delete();
+
+        return redirect('/tickets');
+    }
+
     public function show($id) {        
 //        return view('ticket_details', [
 //            'ticket' => Ticket::where('id', $id)->first(),
@@ -155,6 +161,31 @@ class TicketsController extends Controller
 //            'attachments' => Attachment::where('ticket_id', $id)->get()
 //        ]);
         $ticket = Ticket::where('id', $id)->first();
+
+        switch (session('LoggedUserRole')) {
+            case "Project manager":
+                $projectIds = ProjectPersonnel::where('user_id', session('LoggedUserId'))
+                                                    ->pluck('project_id')
+                                                    ->toArray();
+                if (!in_array($ticket->project_id, $projectIds)) {
+                    abort(403);
+                }
+                break;
+
+            case "Developer":
+                if (!($ticket->developer_id == session('LoggedUserId') || $ticket->submitter_id == session('LoggedUserId'))) {
+                    abort(403);
+                }
+                break;
+
+            case "Submitter":
+                if (!($ticket->submitter_id == session('LoggedUserId'))) {
+                    abort(403);
+                }
+                break;
+        }
+
+
 //        $projectUserIdsForSelectedTicket = ProjectPersonnel::select('user_id')
 //                                                ->where('project_id', $ticket->project_id);
 //        $developers = User::whereIn('id', $projectUserIdsForSelectedTicket)
@@ -376,9 +407,15 @@ class TicketsController extends Controller
         return redirect()->route('tickets.show', [$newComment->ticket_id]);
     }
 
+    public function deleteComment(Request $request) {
+        $comment = Comment::find($request->cid);
+        $deleted = $comment->delete();
+
+        return redirect()->route('tickets.show', [$comment->ticket_id]);
+    }
+
     public function uploadAttachment(Request $request) {
-        $count = Attachment::where('ticket_id', $request->tid)->count();
-        $path = $request->tfile->storeAs('attached_files', ($count + 1) . '.' . $request->tfile->extension(), 'public');
+        $path = $request->tfile->storeAs('attached_files', date("YmdHis") . '.' . $request->tfile->extension(), 'public');
 
         $newAttachment = new Attachment;
         $newAttachment->ticket_id = $request->tid;
@@ -395,7 +432,16 @@ class TicketsController extends Controller
         $attachment = Attachment::where('id', $id)->first();
 
         return response()->download(base_path() . "/public/storage/" . $attachment->path);
-    }    
+    }  
+
+    public function deleteAttachment(Request $request) {
+        $attachment = Attachment::find($request->aid);
+        $deleted = $attachment->delete();
+
+        Storage::delete('public/' . $attachment->path);
+
+        return redirect()->route('tickets.show', [$attachment->ticket_id]);
+    }  
 
     public function editTicketForm($id) {  
         $selectedTicket = Ticket::where('id', $id)->first();

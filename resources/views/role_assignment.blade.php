@@ -7,9 +7,9 @@
 			<form action="{{ route('assignRole') }}" method="post">
 			{{ csrf_field() }}
 				<div class="container-fluid">	
-		  			<div class="row">
+		  			<div class="row p-3">
 						<div class="col-auto">  
-							<div class="p-3">
+							<div>
 								<label for="users">
 									Select one or more users:
 								</label>
@@ -27,10 +27,10 @@
 										@enderror
 					                </div>
 								</div>
-							</div>
+							</div>							
 						</div>
 						<div class="col-auto"> 
-							<div class="p-3">
+							<div>
 								<label for="roles">
 									Select the role to assign:
 								</label>
@@ -57,7 +57,7 @@
 										</option>
 										<option value="">
 											None
-										</option>
+										</option> 
 									</select>
 								</div>
 							</div>
@@ -66,6 +66,52 @@
 				</div>  
 			</form>
 		</div>
+
+		<div class="col"> 
+			<form action="{{ route('deleteUser') }}" method="post">
+			{{ csrf_field() }}
+				<div class="container-fluid">	
+		  			<div class="row p-3">
+						<div class="col-auto">  
+							<div>
+								<label for="usersToDelete">
+									Select one or more users:
+								</label>
+								<div class="p-2">
+									<select id="usersToDelete" name="toBeDeleted_userlist[]" multiple>
+										@foreach ($allUsers as $user)
+										<option value="{{ $user->id }}">
+											{{ $user->first_name }} {{ $user->last_name }}
+										</option>
+										@endforeach 
+									</select>
+									<div class="text-danger">
+										@error('toBeDeleted_userlist') 
+											{{ 'You should select one or more users.' }} 
+										@enderror
+					                </div>
+								</div>
+							</div>							
+						</div>
+						<div class="col-auto"> 
+							<div>
+								<label for="delete">
+									Click to delete the selected users
+								</label>
+								<div class="p-2">
+									@if (session('LoggedUserId') != 3)
+                                        <button type="submit" id="delete" onclick="this.form.submit()">Delete</button>
+                                    @else
+                                        <button type="submit" id="delete" disabled>Delete</button>
+                                    @endif	
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>  
+			</form>
+		</div>
+
 	</div>
 	<div class="row">
 		<div class="col">

@@ -248,6 +248,19 @@ class UserAuthController extends Controller
         return redirect()->route('roleAssignment');
     }
 
+    public function deleteUser(Request $request) 
+    {
+        $request->validate([
+            'toBeDeleted_userlist' => 'required'
+        ]);
+
+        foreach ($request->toBeDeleted_userlist as $toBeDeleted_user) {
+            $deleted = User::find($toBeDeleted_user)->delete();
+        }
+
+        return redirect()->route('roleAssignment');
+    }
+
     public function userProfile() {
         $user = User::where('id', session('LoggedUserId'))->first();
         

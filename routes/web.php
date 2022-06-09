@@ -47,6 +47,8 @@ Route::group(['middleware'=>['AuthCheck']], function(){
 
 	Route::post('/assignRole', [UserAuthController::class, 'assignRole'])->name('assignRole');
 
+	Route::post('/deleteUser', [UserAuthController::class, 'deleteUser'])->name('deleteUser');
+
 	Route::get('/projectAssignment', [ProjectsController::class, 'projectAssignment'])->name('projectAssignment')->middleware('admin_or_project_manager');
 
 	Route::get('/projectAssignment/{projectId}', [ProjectsController::class, 'projectAssignmentWithProjectId'])->name('projectAssignmentWithProjectId')->middleware('admin_or_project_manager');
@@ -63,6 +65,8 @@ Route::group(['middleware'=>['AuthCheck']], function(){
 
 	Route::post('/createNewProject', [ProjectsController::class, 'createNewProject'])->name('createNewProject');
 
+	Route::post('/deleteProject', [ProjectsController::class, 'deleteProject'])->name('deleteProject');
+
 	Route::get('/tickets', [TicketsController::class, 'index'])->name('tickets');
 
 	Route::get('/tickets/{id}', [TicketsController::class, 'show'])->name('tickets.show');
@@ -73,11 +77,17 @@ Route::group(['middleware'=>['AuthCheck']], function(){
 
 	Route::post('/createNewTicket', [TicketsController::class, 'createNewTicket'])->name('createNewTicket');
 
+	Route::post('/deleteTicket', [TicketsController::class, 'deleteTicket'])->name('deleteTicket');
+
 	Route::post('/addComment', [TicketsController::class, 'addComment'])->name('addComment');
+
+	Route::post('/deleteComment', [TicketsController::class, 'deleteComment'])->name('deleteComment');
 
 	Route::post('/uploadAttachment', [TicketsController::class, 'uploadAttachment'])->name('uploadAttachment');
 
 	Route::get('/downloadAttachment/{id}', [TicketsController::class, 'downloadAttachment'])->name('downloadAttachment');
+
+	Route::post('/deleteAttachment', [TicketsController::class, 'deleteAttachment'])->name('deleteAttachment');
 
 	Route::get('/userProfile', [UserAuthController::class, 'userProfile'])->name('userProfile');
 

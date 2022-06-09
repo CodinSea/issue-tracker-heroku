@@ -116,9 +116,15 @@
                          <div class="d-flex flex-column justify-content-center px-3 border rounded">
                               <span>
                                    {{ $projectManager->first_name }} {{ $projectManager->last_name }} 
-                                   <button wire:click="remove({{ $projectManager->id }})">
-                                        <i class="fa fa-remove"></i>
-                                   </button>
+                                   @if (session('LoggedUserId') != 3)
+                                        <button wire:click="remove({{ $projectManager->id }})">
+                                             <i class="fa fa-remove"></i>
+                                        </button>
+                                   @else
+                                        <button wire:click="remove({{ $projectManager->id }})" disabled>
+                                             <i class="fa fa-remove"></i>
+                                        </button>
+                                   @endif
                               </span>
                               {{ $projectManager->role }}
                          </div>
@@ -134,9 +140,15 @@
                          <div class="d-flex flex-column justify-content-center px-3 border rounded">
                               <span>
                                    {{ $projectDeveloper->first_name }} {{ $projectDeveloper->last_name }} 
-                                   <button wire:click="remove({{ $projectDeveloper->id }})">
-                                        <i class="fa fa-remove"></i>
-                                   </button>
+                                   @if (session('LoggedUserId') != 3)
+                                        <button wire:click="remove({{ $projectDeveloper->id }})">
+                                             <i class="fa fa-remove"></i>
+                                        </button>
+                                   @else
+                                        <button wire:click="remove({{ $projectDeveloper->id }})" disabled>
+                                             <i class="fa fa-remove"></i>
+                                        </button>
+                                   @endif
                               </span>
                               {{ $projectDeveloper->role }}
                          </div>
@@ -152,9 +164,15 @@
                          <div class="d-flex flex-column justify-content-center px-3 border rounded">
                               <span>
                                    {{ $projectSubmitter->first_name }} {{ $projectSubmitter->last_name }} 
-                                   <button wire:click="remove({{ $projectSubmitter->id }})">
-                                        <i class="fa fa-remove"></i>
-                                   </button>
+                                   @if (session('LoggedUserId') != 3)
+                                        <button wire:click="remove({{ $projectSubmitter->id }})">
+                                             <i class="fa fa-remove"></i>
+                                        </button>
+                                   @else
+                                        <button wire:click="remove({{ $projectSubmitter->id }})" disabled>
+                                             <i class="fa fa-remove"></i>
+                                        </button>
+                                   @endif
                               </span>
                               {{ $projectSubmitter->role }}
                          </div>

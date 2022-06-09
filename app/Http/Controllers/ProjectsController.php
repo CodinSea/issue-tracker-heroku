@@ -162,6 +162,12 @@ class ProjectsController extends Controller
         return redirect('/projects');
     }
 
+    public function deleteProject(Request $request) {
+        $deleted = Project::find($request->pid)->delete();
+
+        return redirect('/projects');
+    }
+
     public function show(Request $request, $id) {
         $project = Project::where('id', $id)->first();  
         $user_ids = ProjectPersonnel::select('user_id')

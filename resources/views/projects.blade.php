@@ -55,7 +55,26 @@
                 <div id="tableContainer">    
                     <div class="bg-warning text-white p-2 border">
                         <span style="font-size: 18px">Your Projects</span><br>
-                        <span style="font-size: 14px">All the projects in your database</span>
+                        @switch(session('LoggedUserRole'))
+                            @case("Admin")
+                                <span style="font-size: 14px">All the projects in your database</span>
+                                @break
+
+                            @case("Project manager")
+                                <span style="font-size: 14px">All the projects you are managing</span>
+                                @break
+
+                            @case("Developer")
+                                <span style="font-size: 14px">All the projects you have been assigned to</span>
+                                @break
+
+                            @case("Submitter")
+                                <span style="font-size: 14px">All the projects you have been assigned to</span>
+                                @break
+
+                            @default
+                                <span style="font-size: 14px"></span>
+                        @endswitch
                     </div>
                     <div>
 
@@ -93,7 +112,26 @@
                                 <tr>
                                     <td>{{$project->name}}</td>
                                     <td>{{$project->description}}</td>
-                                    <td><a href="{{ route('projectAssignmentWithProjectId', ['projectId' => $project->id]) }}">Manage users</a><br><a href="{{ route('projects.show', [$project->id]) }}">Details</a></td>
+                                    <td>
+                                        <a href="{{ route('projectAssignmentWithProjectId', ['projectId' => $project->id]) }}">Manage users</a>
+                                        <br>
+                                        <a href="{{ route('projects.show', [$project->id]) }}">Details</a>
+                                        @if(session('LoggedUserRole') == 'Admin' && session('LoggedUserId') != 3)
+                                            <br>
+                                            <form action="{{ route('deleteProject') }}" method="post">
+                                            {{ csrf_field() }}
+                                                <input type="hidden" name="pid" value="{{ $project->id }}">
+                                                <button type="submit">Delete</button>
+                                            </form>
+                                        @else
+                                            <br>
+                                            <form action="{{ route('deleteProject') }}" method="post">
+                                            {{ csrf_field() }}
+                                                <input type="hidden" name="pid" value="{{ $project->id }}">
+                                                <button type="submit" disabled>Delete</button>
+                                            </form>                                        
+                                        @endif
+                                    </td>
                                 </tr>
                                 @empty
                                     <td colspan="3" align="center">No data available.</td>

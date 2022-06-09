@@ -378,6 +378,7 @@
 	                                <th>@sortablelink('last_name_commenter', 'Commenter')</th>
 	                                <th>@sortablelink('remark', 'Message')</th>
 	                                <th>@sortablelink('created_at', 'Created')</th>
+	                                <th></th>
 	                            </tr>
 	                        </thead>
 	                        <tbody>
@@ -386,9 +387,24 @@
 	                                <td>{{ $comment->commenter['first_name'] }} {{ $comment->commenter['last_name'] }}</td>
 	                                <td>{{ $comment->remark }}</td>
 	                                <td>{{ $comment->created_at }}</td>
+	                                <td>
+                                        @if(session('LoggedUserId') != 3)
+                                            <form action="{{ route('deleteComment') }}" method="post">
+                                            {{ csrf_field() }}
+                                                <input type="hidden" name="cid" value="{{ $comment->id }}">
+                                                <button type="submit">Delete</button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('deleteComment') }}" method="post">
+                                            {{ csrf_field() }}
+                                                <input type="hidden" name="cid" value="{{ $comment->id }}">
+                                                <button type="submit" disabled>Delete</button>
+                                            </form>                                        
+                                        @endif
+	                                </td>
 	                            </tr>
 	                            @empty
-	                            	<td colspan="3" align="center">
+	                            	<td colspan="4" align="center">
 	                            		No data available.
 	                            	</td>
 	                            @endforelse 
@@ -490,6 +506,7 @@
 	                                <th>@sortablelink('last_name_uploader', 'Uploader')</th>
 	                                <th>@sortablelink('description', 'Notes')</th>
 	                                <th>@sortablelink('created_at', 'Created')</th>
+	                                <th></th>
 	                            </tr>
 	                        </thead>
 	                        <tbody>
@@ -502,9 +519,24 @@
 	                                <td>{{ $attachment->uploader['first_name'] }} {{ $attachment->uploader['last_name'] }}</td>
 	                                <td>{{ $attachment->description }}</td>
 	                                <td>{{ $attachment->created_at }}</td>
+	                                <td>
+                                        @if(session('LoggedUserId') != 3)
+                                            <form action="{{ route('deleteAttachment') }}" method="post">
+                                            {{ csrf_field() }}
+                                                <input type="hidden" name="aid" value="{{ $attachment->id }}">
+                                                <button type="submit">Delete</button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('deleteAttachment') }}" method="post">
+                                            {{ csrf_field() }}
+                                                <input type="hidden" name="aid" value="{{ $attachment->id }}">
+                                                <button type="submit" disabled>Delete</button>
+                                            </form>                                        
+                                        @endif
+	                                </td>
 	                            </tr>
 	                            @empty
-	                            	<td colspan="4" align="center">
+	                            	<td colspan="5" align="center">
 	                            		No data available.
 	                            	</td>
 	                            @endforelse 

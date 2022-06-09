@@ -103,7 +103,7 @@
         @livewireStyles               
     </head>
     <body class="antialiased">
-        <header>     
+        <header>   
             <div class="d-flex-column">
                 <div class="d-flex">
                     <div class="d-flex px-3">            

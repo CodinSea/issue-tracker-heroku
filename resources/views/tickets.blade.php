@@ -89,7 +89,26 @@
                 <div id="tableContainer">    
                     <div class="bg-warning text-white p-2 border">
                         <span style="font-size: 18px">Your Tickets</span><br>
-                        <span style="font-size: 14px">All the tickets in your database</span>
+                        @switch(session('LoggedUserRole'))
+                            @case("Admin")
+                                <span style="font-size: 14px">All the tickets in your database</span>
+                                @break
+
+                            @case("Project manager")
+                                <span style="font-size: 14px">All the tickets submitted for your projects</span>
+                                @break
+
+                            @case("Developer")
+                                <span style="font-size: 14px">All the tickets assigned to you or submitted by you</span>
+                                @break
+
+                            @case("Submitter")
+                                <span style="font-size: 14px">All the tickets submitted by you</span>
+                                @break
+
+                            @default
+                                <span style="font-size: 14px"></span>
+                        @endswitch
                     </div>
                     <div>
                         <div class="d-flex justify-content-between">
@@ -125,7 +144,24 @@
                                 <tr>
                                     <td>{{$ticket->title}}</td>
                                     <td>{{$ticket->description}}</td>
-                                    <td><a href="{{ route('tickets.show', [$ticket->id]) }}">Details</a></td>
+                                    <td>
+                                        <a href="{{ route('tickets.show', [$ticket->id]) }}">Details</a>
+                                        @if((session('LoggedUserRole') == 'Admin' || session('LoggedUserRole') == 'Project manager') && session('LoggedUserId') != 3)
+                                            <br>
+                                            <form action="{{ route('deleteTicket') }}" method="post">
+                                            {{ csrf_field() }}
+                                                <input type="hidden" name="tid" value="{{ $ticket->id }}">
+                                                <button type="submit">Delete</button>
+                                            </form>
+                                        @elseif((session('LoggedUserRole') == 'Admin' || session('LoggedUserRole') == 'Project manager') && session('LoggedUserId') == 3)
+                                            <br>
+                                            <form action="{{ route('deleteTicket') }}" method="post">
+                                            {{ csrf_field() }}
+                                                <input type="hidden" name="tid" value="{{ $ticket->id }}">
+                                                <button type="submit" disabled>Delete</button>
+                                            </form>                                        
+                                        @endif
+                                    </td>
                                 </tr>
                                 @empty
                                     <td colspan="3" align="center">No data available.</td>
