@@ -94,7 +94,7 @@ return [
         'password' => $password,
         'charset'  => 'utf8',
         'prefix'   => '',
-        'schema'   => 's3',
+        'schema'   => 'public',
     ),
 
         'sqlsrv' => [
