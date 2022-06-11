@@ -7,7 +7,8 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex flex-column align-items-center text-center">
-                	<img src="{{ URL('storage/images/user_pictures/'.$user->picture) }}" alt="User Image" class="user-image" onerror="this.onerror=null; this.src='{{ URL('storage/images/user_pictures/'.'user_icon.jpg') }}'" width="150">
+<!--                	<img src="{{ URL('storage/images/user_pictures/'.$user->picture) }}" alt="User Image" class="user-image" onerror="this.onerror=null; this.src='{{ URL('storage/images/user_pictures/'.'user_icon.jpg') }}'" width="150">   -->
+                    <img src="{{ Storage::disk('s3')->temporaryUrl('images/user_pictures/'.$user->picture, '+2 minutes') }}" alt="User Image" class="user-image" onerror="this.onerror=null; this.src='{{ Storage::disk('s3')->temporaryUrl('images/user_pictures/'.'user_icon.jpg', '+2 minutes') }}'" width="150">
                 	<p class="lead mt-3">{{ $user->first_name }} {{ $user->last_name }}</p>
                 	<p class="text-secondary mb-1">{{ $user->role }}</p>
                 	<p class="text-muted font-size-sm">{{ $user->province }}, {{ $user->country }}</p>

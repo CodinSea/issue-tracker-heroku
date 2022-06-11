@@ -415,7 +415,8 @@ class TicketsController extends Controller
     }
 
     public function uploadAttachment(Request $request) {
-        $path = $request->tfile->storeAs('attached_files', date("YmdHis") . '.' . $request->tfile->extension(), 'public');
+        $uploader = User::where('id', $request->tuploaderid)->first();
+        $path = $request->tfile->storeAs($uploader->last_name, date("YmdHis") . '.' . $request->tfile->extension());
 
         $newAttachment = new Attachment;
         $newAttachment->ticket_id = $request->tid;
@@ -431,14 +432,18 @@ class TicketsController extends Controller
     public function downloadAttachment($id) {
         $attachment = Attachment::where('id', $id)->first();
 
-        return response()->download(base_path() . "/public/storage/" . $attachment->path);
+        return Storage::download($attachment->path);
+
+//        return response()->download(base_path() . "/public/storage/" . $attachment->path);
     }  
 
     public function deleteAttachment(Request $request) {
         $attachment = Attachment::find($request->aid);
         $deleted = $attachment->delete();
 
-        Storage::delete('public/' . $attachment->path);
+        Storage::delete($attachment->path);
+
+//        Storage::delete('public/' . $attachment->path);
 
         return redirect()->route('tickets.show', [$attachment->ticket_id]);
     }  

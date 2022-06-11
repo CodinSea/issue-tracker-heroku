@@ -310,7 +310,8 @@ class UserAuthController extends Controller
             $file = $request->file('picture');
             $extension = $file->getClientOriginalExtension();
             $filename = Str::lower($user->first_name)."_".Str::lower($user->last_name).".".$extension;
-            $file->storeAs('public\images\user_pictures',$filename);
+            $file->storeAs('images\user_pictures',$filename);
+//            $file->storeAs('public\images\user_pictures',$filename);
             $user->picture = $filename;
             $user->save();
         }

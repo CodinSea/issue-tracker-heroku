@@ -111,7 +111,8 @@
                     @foreach ($projectManagers as $projectManager)
                     <div class="d-flex p-2">
                          <div class="d-flex">
-                              <img src="{{ URL('storage/images/user_pictures/'.$projectManager->picture) }}" alt="User Image" onerror="this.onerror=null; this.src='{{ URL('storage/images/user_pictures/'.'user_icon.jpg') }}'" class="rounded-circle" width="60">
+<!--                              <img src="{{ URL('storage/images/user_pictures/'.$projectManager->picture) }}" alt="User Image" onerror="this.onerror=null; this.src='{{ URL('storage/images/user_pictures/'.'user_icon.jpg') }}'" class="rounded-circle" width="60">   -->
+                              <img src="{{ Storage::disk('s3')->temporaryUrl('images/user_pictures/'.$projectManager->picture, '+2 minutes') }}" alt="User Image" onerror="this.onerror=null; this.src='{{ Storage::disk('s3')->temporaryUrl('images/user_pictures/'.'user_icon.jpg', '+2 minutes') }}'" class="rounded-circle" width="60">
                          </div>
                          <div class="d-flex flex-column justify-content-center px-3 border rounded">
                               <span>
@@ -135,7 +136,8 @@
                     @foreach ($projectDevelopers as $projectDeveloper)
                     <div class="d-inline-flex p-2">
                          <div class="d-flex">
-                              <img src="{{ URL('storage/images/user_pictures/'.$projectDeveloper->picture) }}" alt="User Image" onerror="this.onerror=null; this.src='{{ URL('storage/images/user_pictures/'.'user_icon.jpg') }}'" class="rounded-circle" width="60">
+<!--                              <img src="{{ URL('storage/images/user_pictures/'.$projectDeveloper->picture) }}" alt="User Image" onerror="this.onerror=null; this.src='{{ URL('storage/images/user_pictures/'.'user_icon.jpg') }}'" class="rounded-circle" width="60">   -->
+                              <img src="{{ Storage::disk('s3')->temporaryUrl('images/user_pictures/'.$projectDeveloper->picture, '+2 minutes') }}" alt="User Image" onerror="this.onerror=null; this.src='{{ Storage::disk('s3')->temporaryUrl('images/user_pictures/'.'user_icon.jpg', '+2 minutes') }}'" class="rounded-circle" width="60">
                          </div>
                          <div class="d-flex flex-column justify-content-center px-3 border rounded">
                               <span>
@@ -159,7 +161,8 @@
                     @foreach ($projectSubmitters as $projectSubmitter)
                     <div class="d-inline-flex p-2">
                          <div class="d-flex">
-                              <img src="{{ URL('storage/images/user_pictures/'.$projectSubmitter->picture) }}" alt="User Image" onerror="this.onerror=null; this.src='{{ URL('storage/images/user_pictures/'.'user_icon.jpg') }}'" class="rounded-circle" width="60">
+<!--                              <img src="{{ URL('storage/images/user_pictures/'.$projectSubmitter->picture) }}" alt="User Image" onerror="this.onerror=null; this.src='{{ URL('storage/images/user_pictures/'.'user_icon.jpg') }}'" class="rounded-circle" width="60">   -->
+                              <img src="{{ Storage::disk('s3')->temporaryUrl('images/user_pictures/'.$projectSubmitter->picture, '+2 minutes') }}" alt="User Image" onerror="this.onerror=null; this.src='{{ Storage::disk('s3')->temporaryUrl('images/user_pictures/'.'user_icon.jpg', '+2 minutes') }}'" class="rounded-circle" width="60">
                          </div>
                          <div class="d-flex flex-column justify-content-center px-3 border rounded">
                               <span>
