@@ -37,7 +37,7 @@ Route::post('/resetPassword', [UserAuthController::class, 'resetPassword'])->nam
 Route::group(['middleware'=>['AuthCheck']], function(){
 	Route::get('/demoUser', [UserAuthController::class, 'demoUser'])->name('demoUser');
 
-	Route::get('/', [UserAuthController::class, 'login'])->name('login');
+	Route::get('/login', [UserAuthController::class, 'login'])->name('login');
 
 	Route::get('/register', [UserAuthController::class, 'register'])->name('register');
 
